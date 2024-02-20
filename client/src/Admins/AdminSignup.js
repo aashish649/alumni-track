@@ -49,7 +49,7 @@ const AdminSignup = () => {
       console.log("Admin to Send:", userToSend);
 
       const response = await axios.post(
-        "http://localhost:4000/api/v1/admin/adminSignup",
+        `http://localhost:4000/api/v1/admin/adminSignup`,
         userToSend,
         { headers: { "Content-Type": "application/json" } }
       );
