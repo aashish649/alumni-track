@@ -11,7 +11,7 @@ const fs = require("fs");
 const path = require('path');
 const multer = require("multer");
 const twilio = require("twilio");
-const {io} = require('../index.js');
+
 
 
 dotenv.config();
@@ -638,12 +638,6 @@ const uploadNotice = async (req, res) => {
       },
     });
     
-    // io.emit("newnotice", newNotice);
-    // console.log("Server emitted newnotice event",newNotice);
-
-   
-    
-
     res.status(201).json({
       success: true,
       message: 'Notice uploaded successfully',
