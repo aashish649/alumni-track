@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams,useNavigate } from "react-router-dom";
+import Authcontext from "../context/AuthContext";
 
 const UpdateProfile = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,8 @@ const UpdateProfile = () => {
   });
   const { user_id } = useParams();
   const navigate = useNavigate();
+  const {loggedInUserDetails } = useContext(Authcontext);
+  
 
 
   useEffect(() => {
@@ -75,7 +78,7 @@ const UpdateProfile = () => {
       );
       toast.success("Profile updated successfully");
       setTimeout(() => {
-        navigate("/dashboard")
+      navigate(`/dashboard/${loggedInUserDetails.user._id}`);
       },2000);
       console.log(response.data); // Handle success response
     } catch (error) {

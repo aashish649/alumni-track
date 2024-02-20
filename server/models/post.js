@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
     user: {
@@ -45,4 +45,4 @@ const postSchema = mongoose.Schema({
 }, { timestamps: true });
 
 
-export default mongoose.model("Post",postSchema);
+module.exports =  mongoose.model("Post",postSchema);

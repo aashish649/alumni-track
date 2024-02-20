@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const noticeSchema = new mongoose.Schema({
     title:{
@@ -18,4 +18,4 @@ const noticeSchema = new mongoose.Schema({
         default:Date.now,
     },
 });
-export default mongoose.model("Notice",noticeSchema);
+module.exports =  mongoose.model("Notice",noticeSchema);

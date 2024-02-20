@@ -1,14 +1,18 @@
-import bcrypt from "bcrypt";
-import User from "../models/user.js";
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
-import cloudinary from "cloudinary";
-import Faq from "../models/faQ.js";
-import mongoose from "mongoose";
-import Notice from "../models/notice.js";
-
+const bcrypt = require("bcrypt");
+const User = require("../models/user.js");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+const cloudinary = require("cloudinary");
+const Faq = require("../models/faQ.js");
+const mongoose = require("mongoose");
+const Notice = require("../models/notice.js");
+const { join } = require('path');
 dotenv.config();
+const { uploadToCloudinary } = require("../utils/cloudinary.js");
+const multer = require("multer");
+const fs = require('fs');
+const path = require('path');
 
 const signup = async (req, res) => {
   try {
@@ -365,81 +369,129 @@ const changePassword = async (req, res) => {
   }
 };
 
-import { join } from "path";
 
-const localfileupload = async (req, res) => {
+
+// const localfileupload = async (req, res) => {
+//   try {
+//     const file =  req.files.file;
+
+//     if (!file) {
+//       return res.status(400).json({
+//         success: false,
+//         message: 'File not provided in the request.',
+//       });
+//     }
+//     const filesFolderPath = "controllers/files";
+
+//     const fileName = `${Date.now()}_${file.name}`;
+
+//     const filePath = join(filesFolderPath, fileName);
+
+//     file.mv(filePath, (err) => {
+//       if (err) {
+//         console.error(err);
+//         throw new Error("Error moving file");
+//       }
+//     });
+
+//     const photoUrl = `http://localhost:4000/api/v1/users/controllers/files/${fileName}`;
+//     const userId = req.user.user_id;
+//     const user = await User.findByIdAndUpdate(
+//       userId,
+//       {
+//         "photo.url": photoUrl,
+//       },
+//       { new: true }
+//     );
+
+   
+//     res.json({
+//       success: true,
+//       user,
+//       message: "Local File Uploaded Successfully",
+//     });
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).json({ success: false, message: "Failed to upload file" });
+//   }
+// };
+
+const imgconfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    const extname = path.extname(file.originalname).toLowerCase();
+    callback(null, file.fieldname + '-' + Date.now() + extname);
+  },
+});
+const cloudinaryUploadpro = multer({
+  storage: imgconfig,
+  fileFilter: (req, file, callback) => {
+    // Allow all image file types
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
+    const extname = path.extname(file.originalname).toLowerCase();
+    if (allowedExtensions.includes(extname)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Only image files (jpg, jpeg, png, gif, bmp) are allowed'));
+    }
+  },
+});
+
+
+const uploadProfileImage = async (req, res) => {
   try {
-    const file = req.files.file;
+    const { user_id } = req.params;
 
-    const filesFolderPath = "controllers/files";
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: 'File not provided in the request.',
+      });
+    }
 
-    const fileName = `${Date.now()}_${file.name}`;
+    const folderName = 'profile';
 
-    const filePath = join(filesFolderPath, fileName);
+    try {
+     
 
-    file.mv(filePath, (err) => {
-      if (err) {
-        console.error(err);
-        throw new Error("Error moving file");
-      }
-    });
+      const upload = await uploadToCloudinary(req.file.path, folderName);
+      const imageUrl = upload.secure_url;
+      const imageFilename = upload.public_id;
 
-    const photoUrl = `http://localhost:4000/api/v1/users/controllers/files/${fileName}`;
-    const userId = req.user.user_id;
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        "photo.url": photoUrl,
-      },
-      { new: true }
-    );
+  
+      fs.unlinkSync(req.file.path);
 
-    // create a successful response
-    res.json({
-      success: true,
-      user,
-      message: "Local File Uploaded Successfully",
-    });
+      const user = await User.findByIdAndUpdate(
+        user_id,
+        {
+          "photo.url": imageUrl,
+          "photo.filename": imageFilename,
+        },
+        { new: true }
+      );
+
+      res.status(201).json({
+        success: true,
+        message: 'Profile image uploaded successfully',
+        user,
+      });
+    } catch (uploadError) {
+      console.error("Error during Cloudinary upload:", uploadError);
+      return res.status(500).json({ success: false, error: 'Error uploading file to Cloudinary' });
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "Failed to upload file" });
+    console.error("Unexpected error:", error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 };
 
-const imageUpload = async (req, res) => {
-  try {
-    const file = req.files.file;
-    console.log("FILE AAGYI JEE -> ", file);
 
-    const result = await cloudinary.uploader.upload(file.tempFilePath, {
-      folder: "Alumni",
-    });
-
-    const photoUrl = result.secure_url;
-    const userId = req.params.user_id;
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        "photo.url": photoUrl,
-      },
-      { new: true }
-    );
-    res.json({
-      success: true,
-      user,
-      message: "File Uploaded to Cloudinary Successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to upload file to Cloudinary" });
-  }
-};
 
 const updateProfile = async (req, res) => {
   try {
-    const userId = req.user.user_id;
+    const userId = req.params.user_id;
     const updateUser = await User.findByIdAndUpdate(
       userId,
       { $set: req.body },
@@ -635,16 +687,14 @@ const userPassword = async (req, res) => {
   }
 };
 
-export {
+module.exports = {
   signup,
   login,
   userloggedin,
   userlogged,
   getUserData,
   logout,
-  localfileupload,
-  imageUpload,
-  updateProfile,
+ updateProfile,
   searchUser,
   getUser,
   userProfile,
@@ -655,4 +705,6 @@ export {
   forgotPassword,
   changePassword,
   userPassword,
+  uploadProfileImage,
+  cloudinaryUploadpro,
 };

@@ -21,12 +21,7 @@ const UserProfile = () => {
             },
           }
         );
-        console.log("Params:", user_id); //
-        console.log(
-          "API Request:",
-          `http://localhost:4000/api/v1/users/userprofile/${user_id}`
-        );
-        console.log("API Response:", response.data);
+        console.log("Params:", user_id);
 
         const userData = response.data.user;
 

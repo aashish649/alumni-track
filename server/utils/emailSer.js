@@ -1,6 +1,6 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
-const sendVerificationEmail = async (adminmobileNo,verificationToken) => {
+const sendVerificationEmail = async (adminmobileNo, verificationToken) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -17,7 +17,6 @@ const sendVerificationEmail = async (adminmobileNo,verificationToken) => {
       to: process.env.HOD_EMAIL,
       subject: "Admin Signup Approval Needed",
       text: `An admin has signed up with email: ${adminmobileNo}.  Please verify and approve the signup by clicking on the following link: ${verificationLink}.`,
-     
     };
 
     const info = await transporter.sendMail(mailOptions);
@@ -31,5 +30,4 @@ const sendVerificationEmail = async (adminmobileNo,verificationToken) => {
   }
 };
 
-export {sendVerificationEmail};
-
+module.exports = { sendVerificationEmail };

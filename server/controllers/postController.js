@@ -1,10 +1,10 @@
-import Post from "../models/post.js";
-import User from "../models/user.js";
-import multer from "multer";
-import cloudinary from "cloudinary";
-import fs from 'fs';
-import { uploadToCloudinary } from "../utils/cloudinary.js";
-import path from 'path';
+const Post = require("../models/post.js");
+const User = require("../models/user.js");
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const fs = require('fs');
+const { uploadToCloudinary } = require("../utils/cloudinary.js");
+const path = require('path');
 
 const imgconfig = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -295,4 +295,4 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-export { createPost, deletePost, like, disLikes, createComment,getPost,getAllPosts,cloudinaryUpload };
+module.exports = { createPost, deletePost, like, disLikes, createComment,getPost,getAllPosts,cloudinaryUpload };

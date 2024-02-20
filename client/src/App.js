@@ -34,7 +34,7 @@ import ForgotPassword from "./user/ForgotPassword";
 import AdminResetpass from "./Admins/AdminResetpass";
 import AdminForgotPass from "./Admins/AdminForgotpass";
 import UserPassword from "./user/UserPassword";
-
+import ProfileImage from "./user/ProfileImage";
 
 const UserPrivateRoute = ({ element }) => {
   const { isUserLoggedIn } = useContext(AuthContext);
@@ -51,7 +51,7 @@ const AdminPrivateRoute = ({ element }) => {
 const router = createBrowserRouter([
   {path:"/forgotpassword/:id/:token", element:<ForgotPassword/>},
   { path: "/admin/verifyEmail/:token", element: <EmailVerify /> },
-  { path: "/dashboard", element: <UserPrivateRoute element={<DashBoard />} /> },
+  { path: "/dashboard/:user_id", element: <UserPrivateRoute element={<DashBoard />} /> },
   
   {
     path: "/",
@@ -92,11 +92,6 @@ const router = createBrowserRouter([
   {
     path: "/post/:post_id",
     element: <UserPrivateRoute element={<UserPost />} />,
-  },
-
-  {
-    path: "/userprofile/:user_id",
-    element: <UserPrivateRoute element={<UserProfile />} />,
   },
 
   {

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Authcontext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
+
 const LoginForm = () => {
   const [user, setuser] = useState({
     email: "",
@@ -17,8 +18,8 @@ const LoginForm = () => {
     setuser({ ...user, [name]: value });
   };
   const [success, setSuccess] = useState(false);
-  const { checkUserLoginStatus } = useContext(Authcontext);
-
+  const { checkUserLoginStatus,loggedInUserDetails } = useContext(Authcontext);
+  
   useEffect(() => {
     checkUserLoginStatus();
   }, []);
@@ -48,7 +49,7 @@ const LoginForm = () => {
 
         
         await checkUserLoginStatus();
-        navigate("/dashboard");
+        navigate(`/dashboard/${loggedInUserDetails.user._id}`);
         toast.success("Login Successful!");
 
       } else {

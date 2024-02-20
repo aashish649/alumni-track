@@ -7,27 +7,28 @@ const HomeSection = () => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
 
+  console.log("homesection",user_id);
+
+  const fetchUser = async () => {
+    try {
+      const userToken = localStorage.getItem("token");
+      const response = await axios.get(
+        `http://localhost:4000/api/v1/users/${user_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      setUser(response.data.user);
+    } catch (err) {
+      console.error("Error fetching user data: ", err);
+    }
+  };
+
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const userToken = localStorage.getItem("token");
-        const response = await axios.get(
-          `http://localhost:4000/api/v1/users/${user_id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-            },
-          }
-        );
-
-        setUser(response.data.user);
-      } catch (err) {
-        console.error("Error fetching user data: ", err);
-      }
-    };
-
     fetchUser();
-  }, [user_id]);
+  },[])
 
   return (
     <div className="mx-auto my-8 h-full bg-slate-100">

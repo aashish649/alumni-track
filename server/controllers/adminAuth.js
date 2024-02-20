@@ -1,24 +1,18 @@
-import bcrypt from "bcrypt";
-import Admin from "../models/adminmodel.js";
-import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
-import { sendVerificationEmail } from "../utils/emailSer.js";
-import Faq from "../models/faQ.js";
-import User from "../models/user.js";
-import nodemailer from "nodemailer";
-import Notice from "../models/notice.js";
-import { io } from "../index.js";
-import fs from "fs";
-import path from 'path';
-import multer from "multer";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import twilio from "twilio";
+const bcrypt = require("bcrypt");
+const Admin = require("../models/adminmodel.js");
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+const { sendVerificationEmail } = require("../utils/emailSer.js");
+const Faq = require("../models/faQ.js");
+const User = require("../models/user.js");
+const nodemailer = require("nodemailer");
+const Notice = require("../models/notice.js");
+const fs = require("fs");
+const path = require('path');
+const multer = require("multer");
+const twilio = require("twilio");
+const {io} = require('../index.js');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-console.log(__dirname);
 
 dotenv.config();
 
@@ -644,8 +638,8 @@ const uploadNotice = async (req, res) => {
       },
     });
     
-    io.emit("newnotice", newNotice);
-    console.log("Server emitted newnotice event",newNotice);
+    // io.emit("newnotice", newNotice);
+    // console.log("Server emitted newnotice event",newNotice);
 
    
     
@@ -668,7 +662,7 @@ const uploadNotice = async (req, res) => {
 
 
 
-export {
+module.exports =  {
   adminSignup,
   verifyEmail,
   adminLogin,

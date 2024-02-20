@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from "react-toastify";
 
 const UploadNotice = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +41,11 @@ const UploadNotice = () => {
       console.log(response.data);
 
       if (response.data.success) {
-        console.log("Notice uploaded successfully:", response.data.notice);
+        toast.success("Notice uploaded successfully");
+        setTimeout(function() {
+          window.location.reload(false);
+      }, 2000);
+
       } else {
         console.error("Upload failed:", response.data.error);
       }

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const faqSchema = new mongoose.Schema({
     user:{
@@ -17,5 +17,4 @@ const faqSchema = new mongoose.Schema({
     timestamps:true,
 }
 );
-
-export default mongoose.model("faq",faqSchema);
+module.exports = mongoose.model("faq", faqSchema);

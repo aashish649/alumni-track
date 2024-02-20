@@ -20,7 +20,7 @@ const Notifications = () => {
   }, []);
 
   return (
-    <div className="mx-auto my-8 p-4 bg-white rounded-md shadow-md max-w-md">
+    <div className="mx-auto my-8 p-4 bg-amber-100 rounded-md shadow-md max-w-md">
     <h2 className="text-2xl font-semibold mb-4">All Notices</h2>
     {notices.length > 0 ? (
       <ul className="space-y-4">
@@ -32,7 +32,7 @@ const Notifications = () => {
               <a
                 href={`http://localhost:4000/api/v1/users/controllers/pdfuploads/${notice.pdf.filename}`}
                 download
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+                className="bg-gradient-to-r font-semibold from-red-400 to-amber-300 text-black p-2 rounded inline-flex items-center"
               >
                 Download Notice
                 <svg
