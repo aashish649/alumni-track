@@ -1,0 +1,29 @@
+# Node.js dependencies
+node_modules/
+
+# Build files
+/build
+/public
+
+# Environment variables
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs
+*.log
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# MongoDB backup data
+dump/

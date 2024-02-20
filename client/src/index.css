@@ -1,0 +1,17 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer utilities {
+    .from-sky-light {
+      background-color: #87CEEB; 
+    }
+  
+    .to-sky-dark {
+      background-color: #4682B4; 
+    }
+  }
+
+
+
