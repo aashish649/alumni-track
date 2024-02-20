@@ -29,22 +29,14 @@ app.use(express.json());
 
 connectDb();
 
-try {
-  cloudinaryConnect();
-} catch (error) {
-  console.error('Error connecting to Cloudinary:', error);
-  process.exit(1);
-}
+
+cloudinaryConnect();
+
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/post", postRouter);
 
-app.use('/api/v1/users/controllers/files', express.static(path.join(__dirname, 'controllers', 'files')));
-app.use('/api/v1/users/:user_id/localfileupload', fileUpload({
-  useTempFiles: true,
-  tempFileDir: '/tmp/',
-}));
 
 app.use('/api/v1/users/controllers/pdfuploads', express.static(path.join(__dirname, 'controllers', 'pdfuploads')));
 
