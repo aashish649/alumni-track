@@ -69,7 +69,6 @@ userRouter.get("/searchUser", authUser, searchUser);
 userRouter.post("/faq", authUser, askQuestion);
 userRouter.get("/:user_id", authUser, getUserData);
 userRouter.post('/:user_id/uploadProfileImage', cloudinaryUploadpro.single('file'), uploadProfileImage);
-
 userRouter.get("/userprofile/:user_id", authUser, userProfile);
 userRouter.put("/:user_id/updateProfile", authUser, updateProfile);
 userRouter.post("/userpassword/:user_id", authUser, userPassword);
@@ -85,30 +84,19 @@ adminRouter.get("/Adminlogout", Adminlogout);
 adminRouter.get("/adminLoggedIn", authAdmin, adminLoggedIn);
 adminRouter.get("/searchadmin", authAdmin, searchAdmin);
 adminRouter.post("/sendemail", authAdmin, sendMail);
-adminRouter.post(
-  "/uploadnotice",
-  authAdmin,
-  upload.single("pdf"),
-  uploadNotice
-);
+adminRouter.post("/uploadnotice",authAdmin,upload.single("pdf"),uploadNotice);
 adminRouter.delete("/deleteuser/:user_id", authAdmin, deleteUser);
 adminRouter.get("/faq/notanswer", authAdmin, unanswered);
 adminRouter.post("/faq/answer/:q_id", authAdmin, answer);
 adminRouter.delete("/faq/delete/:q_id", authAdmin, deleteQuestion);
 
 // Post routes
-postRouter.post(
-  "/createpost",
-  cloudinaryUpload.single("file"),
-  authUser,
-  createPost
-);
+postRouter.post( "/createpost", cloudinaryUpload.single("file"), authUser, createPost);
 postRouter.get("/getallpost", getAllPosts);
 postRouter.delete("/deletepost/:post_id", authUser, deletePost);
 postRouter.get("/like/:post_id", authUser, like);
 postRouter.get("/dislike/:post_id", authUser, disLikes);
 postRouter.post("/comment/:post_id", authUser, createComment);
-
-postRouter.get("/getpost/:post_id", getPost, deleteQuestion);
+postRouter.get("/getpost/:post_id", authUser,getPost );
 
 module.exports = { userRouter, adminRouter, postRouter };
