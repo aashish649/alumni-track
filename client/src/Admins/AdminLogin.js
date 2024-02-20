@@ -27,10 +27,7 @@ const AdminLogin = () => {
     event.preventDefault();
 
     try {
-      // const adminTOSend = {
-      //   mobileNo:parseInt(user.mobileNo),
-      //   password:user.password
-      // };
+    
 
       const response = await axios.post(
         `http://localhost:4000/api/v1/admin/adminLogin`,
@@ -38,10 +35,7 @@ const AdminLogin = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      console.log("Admin Login", response.data.success);
-      console.log("Login response: ", response.data);
-      console.log("Status code: ", response.status);
-
+    
       if (response.data.success === true) {
         const token = response.data.token;
 

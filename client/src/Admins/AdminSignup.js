@@ -37,8 +37,7 @@ const AdminSignup = () => {
         return;
       }
 
-      console.log("Request Payload Admin:", user);
-
+     
       const userToSend = {
         name: user.name,
         email: user.email,
@@ -46,7 +45,7 @@ const AdminSignup = () => {
         password: user.password,
       };
 
-      console.log("Admin to Send:", userToSend);
+     
 
       const response = await axios.post(
         `http://localhost:4000/api/v1/admin/adminSignup`,
@@ -54,7 +53,7 @@ const AdminSignup = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      console.log("Full Server Response admin:", response);
+      
 
       if (response.data.success) {
         toast.success(

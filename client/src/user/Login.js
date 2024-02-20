@@ -45,8 +45,6 @@ const LoginForm = () => {
 
         // Save the token in local storage
         localStorage.setItem("token", token);
-        console.log('Token saved to localStorage:', localStorage.getItem('token'));
-
         
         await checkUserLoginStatus();
         navigate(`/dashboard/${loggedInUserDetails.user._id}`);
@@ -78,7 +76,6 @@ const LoginForm = () => {
     }
   };
   useEffect(() => {
-    // Clear the form fields after successful signup
     setuser({
       email: "",
       password: "",

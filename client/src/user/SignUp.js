@@ -56,8 +56,7 @@ const SignupForm = () => {
         );
         return;
       }
-      console.log("Request Payload:", user);
-
+      
       const userToSend = {
         name: user.name,
         rollNo: parseInt(user.rollNo),
@@ -68,14 +67,13 @@ const SignupForm = () => {
         password: user.password,
       };
 
-      console.log("User to Send:", userToSend);
 
       const response = await axios.post(
         `http://localhost:4000/api/v1/users/signup`,
         userToSend,
         { headers: { "Content-Type": "application/json" } }
       );
-      console.log("Full Server Response:", response);
+   
 
       if (response.data.success) {
         setSuccess(true);
@@ -88,7 +86,7 @@ const SignupForm = () => {
         toast.error("Error signing up. Please try again.");
       }
     } catch (error) {
-      // Log the specific error message for debugging
+    
       console.error("Signup failed:", error.message);
 
       // Handle specific case when user is already registered

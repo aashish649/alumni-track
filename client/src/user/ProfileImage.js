@@ -15,8 +15,7 @@ const ProfileImage = ({ user, setUser }) => {
         formData.append("file", file);
 
         const userToken = localStorage.getItem("token");
-        console.log("User Token:", userToken);
-
+      
         const response = await axios.post(
           `http://localhost:4000/api/v1/users/${user_id}/uploadProfileImage`, 
           formData,
@@ -29,7 +28,6 @@ const ProfileImage = ({ user, setUser }) => {
         );
 
         const photoUrl = response.data.user.photo.url;
-        console.log("Image URL:", photoUrl);
         setUser((prevUser) => ({
           ...prevUser,
           photo: {

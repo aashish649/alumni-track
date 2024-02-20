@@ -14,9 +14,9 @@ const ForgotPassword = () => {
 
   const userValid = async () => {
     try {
-      console.log("ID and Token:", id, token);
+      
       const res = await axios.get(`http://localhost:4000/api/v1/users/forgotpassword/${id}/${token}`);
-      console.log("User validation response:", res.data);
+     
 
       if (res.status === 200) {
         console.log('User is valid');
