@@ -8,7 +8,7 @@ const HomeSection = () => {
   const { user_id } = useParams();
   const [user, setUser] = useState(null);
 
-  console.log("homesection",user_id);
+ 
 
   const fetchUser = async () => {
     try {

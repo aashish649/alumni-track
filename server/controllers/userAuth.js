@@ -369,25 +369,9 @@ const changePassword = async (req, res) => {
   }
 };
 
-
-// const imgconfig = multer.diskStorage({
-//   destination: (req, file, callback) => {
-//     callback(null, "./uploads");
-//   },
-//   filename: (req, file, callback) => {
-//     const extname = path.extname(file.originalname).toLowerCase();
-//     callback(null, file.fieldname + '-' + Date.now() + extname);
-//   },
-// });
-
-
-
-const imgconfig = multer.memoryStorage();
-
 const cloudinaryUploadpro = multer({
-  storage: imgconfig,
+  storage: multer.memoryStorage(),
   fileFilter: (req, file, callback) => {
-    // Allow all image file types
     const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
     const extname = path.extname(file.originalname).toLowerCase();
     if (allowedExtensions.includes(extname)) {
@@ -397,7 +381,6 @@ const cloudinaryUploadpro = multer({
     }
   },
 });
-
 
 const uploadProfileImage = async (req, res) => {
   try {
@@ -411,37 +394,43 @@ const uploadProfileImage = async (req, res) => {
     }
 
     const folderName = 'profile';
+    let uploadAttempts = 3;
 
-    try {
-    
-      const upload = await uploadToCloudinary(req.file.path, folderName);
-      const imageUrl = upload.secure_url;
-      const imageFilename = upload.public_id;
+    while (uploadAttempts > 0) {
+      try {
+        console.log("Before Cloudinary upload");
+        const upload = await uploadToCloudinary(req.file.buffer, folderName);
+        console.log("After Cloudinary upload");
 
-  
-      fs.unlinkSync(req.file.path);
+        const imageUrl = upload.secure_url;
+        const imageFilename = upload.public_id;
 
-      const user = await User.findByIdAndUpdate(
-        user_id,
-        {
-          "photo.url": imageUrl,
-          "photo.filename": imageFilename,
-        },
-        { new: true }
-      );
+        const user = await User.findByIdAndUpdate(
+          user_id,
+          {
+            "photo.url": imageUrl,
+            "photo.filename": imageFilename,
+          },
+          { new: true }
+        );
 
-      res.status(201).json({
-        success: true,
-        message: 'Profile image uploaded successfully',
-        user,
-      });
-    } catch (uploadError) {
-      console.error("Error during Cloudinary upload:", uploadError);
-      return res.status(500).json({ success: false, error: 'Error uploading file to Cloudinary' });
+        return res.status(201).json({
+          success: true,
+          message: 'Profile image uploaded successfully',
+          user,
+        });
+      } catch (uploadError) {
+        console.error(`Error during Cloudinary upload. Retrying... Attempts left: ${uploadAttempts - 1}`);
+        await new Promise(resolve => setTimeout(resolve, 5000));
+      }
+
+      uploadAttempts--;
     }
+
+    return res.status(500).json({ success: false, error: 'Error uploading file to Cloudinary' });
   } catch (error) {
     console.error("Unexpected error:", error);
-    res.status(500).json({ success: false, error: 'Internal Server Error' });
+    return res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 };
 

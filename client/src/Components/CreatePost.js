@@ -28,7 +28,7 @@ const  CreatePost = () => {
       }
   
       const response = await axios.post(
-        `https://alumni-server-drab.vercel.app/api/v1/post/createpost`,
+        `http://localhost:4000/api/v1/post/createpost`,
         formData,
         {
           headers: {

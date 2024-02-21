@@ -34,97 +34,40 @@ const cloudinaryUpload = multer({
 });
 
 
-// const createPost = async (req, res) => {
-//   try {
-//     const { content } = req.body;
-//     const { user_id } = req.user;
-
-//     const user = await User.findById(user_id);
-//     const { name, rollNo } = user;
-
-//     let imageUrl, imageFilename;
-
-//     console.log("USERID, name, rollNo", user_id, name, rollNo);
-
-//     if (req.file) {
-//       imageUrl = req.file.path;
-//       imageFilename = req.file.filename;
-//     }
-
-//     console.log("File path:", req.file.path);
-//     console.log("Image URL:", imageUrl);
-//     console.log("Image Filename:", imageFilename);
-
-
-
-//     try {
-//       if (req.file) {
-//         const folderName = 'alumni';
-//         const upload = await uploadToCloudinary(req.file.path, folderName);
-//         imageUrl = upload.secure_url;
-//         imageFilename = upload.public_id;
-
-//         fs.unlinkSync(req.file.path);
-//       }
-
-//       const newPost = await Post.create({
-//         content: content,
-//         name: name,
-//         user: user_id,
-//         image: {
-//           url: imageUrl,
-//           filename: imageFilename,
-//         },
-//       });
-
-//       user.post.push(newPost);
-//       await user.save();
-
-//       res.status(201).json({
-//         success: true,
-//         message: 'Post created successfully',
-//         post: newPost,
-//         user: user_id,
-//       });
-//     } catch (uploadError) {
-//       console.error("Error during Cloudinary upload:", uploadError);
-//       return res.status(500).json({ success: false, error: 'Error uploading file to Cloudinary' });
-//     }
-
-//   } catch (error) {
-//     console.error("Unexpected error:", error);
-//     res.status(500).json({ success: false, error: 'Internal Server Error' });
-//   }
-// };
-
 const createPost = async (req, res) => {
   try {
     const { content } = req.body;
     const { user_id } = req.user;
 
     const user = await User.findById(user_id);
-    const { name, rollNo } = user;
-
-    console.log("USERID, name, rollNo", user_id, name, rollNo);
 
     let imageUrl, imageFilename;
 
     if (req.file) {
       const folderName = 'alumni';
-      try {
-        const upload = await uploadToCloudinary(req.file.buffer, folderName);
-        imageUrl = upload.secure_url;
-        imageFilename = upload.public_id;
-      } catch (uploadError) {
-        console.error("Error during Cloudinary upload:", uploadError);
+      let uploadAttempts = 3;
+
+      while (uploadAttempts > 0) {
+        try {
+          const upload = await uploadToCloudinary(req.file.buffer, folderName);
+          imageUrl = upload.secure_url;
+          imageFilename = upload.public_id;
+          break; // Break out of the loop if upload is successful
+        } catch (uploadError) {
+          console.error(`Error during Cloudinary upload. Retrying... Attempts left: ${uploadAttempts - 1}`);
+          await new Promise(resolve => setTimeout(resolve, 5000));
+        }
+
+        uploadAttempts--;
+      }
+
+      if (uploadAttempts === 0) {
         return res.status(500).json({ success: false, error: 'Error uploading file to Cloudinary' });
       }
     }
 
-    // Create a new post
     const newPost = await Post.create({
       content: content,
-      name: name,
       user: user_id,
       image: {
         url: imageUrl,
@@ -138,21 +81,13 @@ const createPost = async (req, res) => {
       success: true,
       message: 'Post created successfully',
       user: user_id,
-      post: {
-        user: user_id,
-        content: content,
-        image: {
-          url: imageUrl,
-          filename: imageFilename,
-        },
-      },
+      post:newPost,
     });
   } catch (error) {
     console.error("Unexpected error:", error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 };
-
 
 const deletePost = async (req, res) => {
   try {
