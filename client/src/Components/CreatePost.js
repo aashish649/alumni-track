@@ -3,7 +3,7 @@ import axios from 'axios';
 import AuthContext from '../context/AuthContext';
 import { toast, ToastContainer } from "react-toastify";
 import { Navigate, useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../utils/constants';
+
 
 const  CreatePost = () => {
   const [content, setContent] = useState('');
@@ -28,7 +28,7 @@ const  CreatePost = () => {
       }
   
       const response = await axios.post(
-        `${BASE_URL}/post/createpost`,
+        `https://alumni-server-drab.vercel.app/api/v1/post/createpost`,
         formData,
         {
           headers: {

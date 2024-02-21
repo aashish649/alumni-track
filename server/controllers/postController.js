@@ -132,15 +132,20 @@ const createPost = async (req, res) => {
       },
     });
 
-    // Update user's posts
     user.post.push(newPost);
     await user.save();
-
     res.status(201).json({
       success: true,
       message: 'Post created successfully',
-      post: newPost,
       user: user_id,
+      post: {
+        user: user_id,
+        content: content,
+        image: {
+          url: imageUrl,
+          filename: imageFilename,
+        },
+      },
     });
   } catch (error) {
     console.error("Unexpected error:", error);
