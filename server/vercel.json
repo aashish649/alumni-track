@@ -1,12 +1,14 @@
 {
-  "version": 2,
-  "builds": [
-    {"src": "*.js", "use": "@vercel/node" }
+  "builds":[
+      {
+          "src":"./app.js",
+          "use":"@vercel/node"
+      }
   ],
-  "routes": [
-    { "src": "/api/v1/users/(.*)", "dest": "/api/v1/users/$1" },
-    { "src": "/api/v1/admin/(.*)", "dest": "/api/v1/admin/$1" },
-    { "src": "/api/v1/post/(.*)", "dest": "/api/v1/post/$1" },
-    { "src": "/(.*)", "dest": "/" }
+  "routes":[
+      {
+          "src":"/.*",
+          "dest":"app.js"
+      }
   ]
 }
