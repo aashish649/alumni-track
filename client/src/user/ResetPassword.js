@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import { BASE_URL } from "../utils/constants";
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -21,7 +21,7 @@ const ResetPassword = () => {
         });
         return;
       }
-      const response = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/users/resetpassword`, { email });
+      const response = await axios.post(`${BASE_URL}/users/resetpassword`, { email });
       if (response.data.success) {
         setEmail('');
         setMessage('Password reset link sent successfully to your email');

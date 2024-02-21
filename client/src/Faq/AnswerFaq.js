@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FaqHelper from './FaqHelper';
+import { BASE_URL } from '../utils/constants';
 
 const AnswerFaq = () => {
   const [posts, setPosts] = useState([]);
@@ -9,7 +10,7 @@ const AnswerFaq = () => {
     async function fetchPosts() {
       try {
         const token = localStorage.getItem("adminToken");
-        const response = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/admin/faq/notanswer`,
+        const response = await axios.get(`${BASE_URL}/admin/faq/notanswer`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

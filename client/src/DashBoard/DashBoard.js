@@ -6,40 +6,19 @@ import { toast, ToastContainer } from "react-toastify";
 import HomeSection from "../user/HomeSection";
 import AuthContext from "../context/AuthContext";
 import { io } from "socket.io-client";
-
+import { BASE_URL } from '../utils/constants';
 
 const Dashboard = () => {
   const [newNotices, setNewNotices] = useState([]);
   const navigate = useNavigate();
   const { loggedInUserDetails } = useContext(AuthContext);
 
-  useEffect(() => {
-    const socket = io(`https://alumni-server-beta.vercel.app/`, { transports: ['websocket'] });
-    socket.on('connect', () => {
-      console.log('Socket connected:', socket.id);
-    });
-  
-    socket.on('newnotice', (newNotice) => {
-      console.log('New notice received:', newNotice);
-  
-     setNewNotices((prevNotices) => {
-      const updatedNotices = [newNotice, ...prevNotices];
-      console.log('Updated Notices:', updatedNotices);
-      return updatedNotices;
-    });
-  });
-
-    return () => {
-      socket.disconnect();
-      console.log('Socket disconnected');
-    };
-  }, []);
   
   const handleLogout = async () => {
     try {
       const userToken = localStorage.getItem("token");
       localStorage.removeItem("token");
-      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/users/logout`, {
+      await axios.get(`${BASE_URL}/users/logout`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },

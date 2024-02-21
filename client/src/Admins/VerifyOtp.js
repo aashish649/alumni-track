@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const VerifyOtp = () => {
   const [mobileNo, setMobileNo] = useState('');
@@ -9,7 +10,7 @@ const VerifyOtp = () => {
   const navigate = useNavigate();
   const verifyOtp = async () => {
     try {
-      const response = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/admin/verifyotp`, {
+      const response = await axios.post(`${BASE_URL}/admin/verifyotp`, {
         mobileNumber: mobileNo,
         otp: otp,
       });

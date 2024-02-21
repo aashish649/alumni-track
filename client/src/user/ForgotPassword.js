@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-
+import { BASE_URL } from "../utils/constants";
 
 const ForgotPassword = () => {
   const { id, token } = useParams();
@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const userValid = async () => {
     try {
       
-      const res = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/users/forgotpassword/${id}/${token}`);
+      const res = await axios.get(`${BASE_URL}/users/forgotpassword/${id}/${token}`);
      
 
       if (res.status === 200) {

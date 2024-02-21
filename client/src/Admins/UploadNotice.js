@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from "react-toastify";
-
+import { BASE_URL } from "../utils/constants";
 const UploadNotice = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -28,7 +28,7 @@ const UploadNotice = () => {
       formDataToSend.append("pdf", formData.pdf);
 
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/admin/uploadnotice`,
+        `${BASE_URL}/admin/uploadnotice`,
         formDataToSend,
         {
           headers: {

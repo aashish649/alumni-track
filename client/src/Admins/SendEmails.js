@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { BASE_URL } from "../utils/constants";
 
 const SendEmails = () => {
   const [to, setTo] = useState("all");
@@ -14,7 +15,7 @@ const SendEmails = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/users/getUser`
+          `${BASE_URL}/users/getUser`
         );
         setUsers(response.data);
         console.log("send email admin", response.data);

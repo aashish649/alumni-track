@@ -4,6 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
+import { BASE_URL } from '../utils/constants';
 
 const AskQuestion = () => {
   const [question, setQuestion] = useState("");
@@ -14,7 +15,7 @@ const AskQuestion = () => {
       const userId = "userId";
       const userToken = localStorage.getItem("token");
       await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/users/faq`,
+        `${BASE_URL}/users/faq`,
         { userId, question },
         {
           headers: {

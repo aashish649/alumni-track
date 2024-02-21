@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Authcontext from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 
 const LoginForm = () => {
@@ -33,7 +34,7 @@ const LoginForm = () => {
     try {
   
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/users/login`,
+        `${BASE_URL}/users/login`,
         user,
         { headers: { "Content-Type": "application/json" } }
       );

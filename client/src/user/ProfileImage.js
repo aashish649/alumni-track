@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { BASE_URL } from "../utils/constants";
 const ProfileImage = ({ user, setUser }) => {
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
@@ -17,7 +17,7 @@ const ProfileImage = ({ user, setUser }) => {
         const userToken = localStorage.getItem("token");
       
         const response = await axios.post(
-          `https://alumni-server-beta.vercel.app/api/v1/users/${user_id}/uploadProfileImage`, 
+          `${BASE_URL}/users/${user_id}/uploadProfileImage`, 
           formData,
           {
             headers: {

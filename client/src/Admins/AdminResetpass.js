@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const AdminResetpass = () => {
   const [mobileNo, setMobileNo] = useState("");
@@ -23,7 +24,7 @@ const AdminResetpass = () => {
         return;
       }
 
-      const response = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/admin/resetadminpass`,
+      const response = await axios.post(`${BASE_URL}/admin/resetadminpass`,
       {mobileNumber:mobileNo}
       );
       if (response.data.success) {

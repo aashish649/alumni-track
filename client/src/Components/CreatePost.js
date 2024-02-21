@@ -3,6 +3,7 @@ import axios from 'axios';
 import AuthContext from '../context/AuthContext';
 import { toast, ToastContainer } from "react-toastify";
 import { Navigate, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../utils/constants';
 
 const  CreatePost = () => {
   const [content, setContent] = useState('');
@@ -27,7 +28,7 @@ const  CreatePost = () => {
       }
   
       const response = await axios.post(
-        `http://localhost:4000/api/v1/post/createpost`,
+        `${BASE_URL}/post/createpost`,
         formData,
         {
           headers: {

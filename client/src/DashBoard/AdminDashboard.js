@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-
+import { BASE_URL } from '../utils/constants';
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const AdminDashboard = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       localStorage.removeItem("adminToken");
-      await axios.get("https://alumni-server-beta.vercel.app/api/v1/admin/Adminlogout", {
+      await axios.get(`${BASE_URL}/admin/Adminlogout`, {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { BASE_URL } from "../utils/constants";
 
 const Profile = ({ userId, onClose }) => {
   const [user, setUser] = useState(null);
@@ -9,7 +9,7 @@ const Profile = ({ userId, onClose }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/users/getUser`
+          `${BASE_URL}/users/getUser`
         );
         const users = response.data;
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ProfileImage from "./ProfileImage";
+import { BASE_URL } from "../utils/constants";
 
 const HomeSection = () => {
   const { user_id } = useParams();
@@ -13,7 +14,7 @@ const HomeSection = () => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.get(
-        `https://alumni-server-beta.vercel.app/api/v1/users/${user_id}`,
+        `${BASE_URL}/users/${user_id}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

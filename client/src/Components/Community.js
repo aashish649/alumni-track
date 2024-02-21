@@ -4,6 +4,7 @@ import AuthContext from "../context/AuthContext";
 import CreatePost from "./CreatePost";
 import CommunityHelper from "./communityHelper";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const Community = () => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +17,7 @@ const Community = () => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get(
-        `https://alumni-server-beta.vercel.app/api/v1/post/getallpost`
+        `${BASE_URL}/post/getallpost`
       );
 
       setPosts(response.data.posts);

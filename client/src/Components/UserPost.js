@@ -6,6 +6,7 @@ import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
+import { BASE_URL } from "../utils/constants";
 
 const UserPost = ({}) => {
   const { loggedInUserDetails } = useContext(AuthContext);
@@ -29,8 +30,13 @@ const UserPost = ({}) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        const userToken = localStorage.getItem("token");
         const response = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/post/getpost/${post_id}`
+          `${BASE_URL}/post/getpost/${post_id}`,{
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
         );
         if (response.data.success) {
           setPost(response.data.post);
@@ -52,7 +58,7 @@ const UserPost = ({}) => {
   const handleLike = async () => {
     try {
       const userToken = localStorage.getItem("token");
-      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/post/like/${post._id}`, {
+      await axios.get(`${BASE_URL}/post/like/${post._id}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -66,7 +72,7 @@ const UserPost = ({}) => {
   const handleUnlike = async () => {
     try {
       const userToken = localStorage.getItem("token");
-      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/post/dislike/${post._id}`, {
+      await axios.get(`${BASE_URL}/post/dislike/${post._id}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -81,7 +87,7 @@ const UserPost = ({}) => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/post/comment/${post._id}`,
+        `${BASE_URL}/post/comment/${post._id}`,
         { content: commentInput },
         {
           headers: {

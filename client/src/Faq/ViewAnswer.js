@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react';
+import { BASE_URL } from '../utils/constants';
 
 const ViewAnswer = () => {
   const [allFaqs, setallFaqs] = useState([]);
@@ -13,7 +14,7 @@ const ViewAnswer = () => {
 
   const fetchallFaqs = async () => {
     try {
-      const response = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/users/allfaq`);
+      const response = await axios.get(`${BASE_URL}/users/allfaq`);
       setallFaqs(response.data);
     } catch (error) {
       console.error('Error fetching all FAQs:', error.message);

@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Profile from "./Profile";
-
+import { BASE_URL } from "../utils/constants";
 const SearchUser = () => {
   const [searchValue, setSearchValue] = useState("");
   const [branch, setBranch] = useState("");
@@ -38,7 +38,7 @@ const SearchUser = () => {
 
       const userToken = localStorage.getItem("token");
       const response = await axios.get(
-        `https://alumni-server-beta.vercel.app/api/v1/users/searchUser`,
+        `${BASE_URL}/users/searchUser`,
         {
           params: { search: searchValue, branch },
           headers: { Authorization: `Bearer ${userToken}` },

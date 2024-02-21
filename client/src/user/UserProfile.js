@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -14,7 +15,7 @@ const UserProfile = () => {
         const userToken = localStorage.getItem("token");
 
         const response = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/users/userprofile/${user_id}`,
+          `${BASE_URL}/users/userprofile/${user_id}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`,

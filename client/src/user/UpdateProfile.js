@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams,useNavigate } from "react-router-dom";
 import Authcontext from "../context/AuthContext";
-
+import { BASE_URL } from "../utils/constants";
 const UpdateProfile = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,7 +28,7 @@ const UpdateProfile = () => {
       try {
         const userToken = localStorage.getItem("token");
         const response = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/users/${user_id}`,
+          `${BASE_URL}/users/${user_id}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -67,7 +67,7 @@ const UpdateProfile = () => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:4000/api/v1/users/${user_id}/updateProfile`,
+        `${BASE_URL}/users/${user_id}/updateProfile`,
         formData,
         {
           headers: {

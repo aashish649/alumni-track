@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const AdminForgotPass = () => {
   const [mobileNo, setMobileNo] = useState("");
@@ -9,11 +10,12 @@ const AdminForgotPass = () => {
   const [message, setMessage] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
   const navigate = useNavigate();
+ 
 
   const verifyOtp = async () => {
     try {
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/admin/verifyotp`,
+        `${BASE_URL}/admin/verifyotp`,
         {
           mobileNumber: mobileNo,
           otp: otp,
@@ -34,7 +36,7 @@ const AdminForgotPass = () => {
   const changePassword = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/admin/changeadminpass",
+        `${BASE_URL}/admin/changeadminpass`,
         {
           mobileNumber: mobileNo,
           newPassword: newPassword,
@@ -56,7 +58,10 @@ const AdminForgotPass = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-amber-100 rounded shadow-md">
-      <h1 className="text-2xl font-semibold mb-8 text-center"> Forgot Password</h1>
+      <h1 className="text-2xl font-semibold mb-8 text-center">
+        {" "}
+        Forgot Password
+      </h1>
 
       {message && <p className="text-green-700 font-bold mb-6">{message}</p>}
 

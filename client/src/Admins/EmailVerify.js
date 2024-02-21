@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { BASE_URL } from "../utils/constants";
 
 const EmailVerify = ({ mobileNo, verificationToken }) => {
   const { token } = useParams();
@@ -11,7 +12,7 @@ const EmailVerify = ({ mobileNo, verificationToken }) => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const response = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/admin/verifyEmail/${mobileNo}/${verificationToken}`, {
+        const response = await axios.get(`${BASE_URL}/admin/verifyEmail/${mobileNo}/${verificationToken}`, {
           responseType: 'text',
         });
 

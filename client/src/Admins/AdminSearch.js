@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminProfile from "./AdminProfile";
+import { BASE_URL } from "../utils/constants";
 
 const AdminSearch = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -28,7 +29,7 @@ const AdminSearch = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await axios.get(
-        `https://alumni-server-beta.vercel.app/api/v1/admin/searchadmin`,
+        `${BASE_URL}/admin/searchadmin`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

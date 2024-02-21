@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const AdminLogin = () => {
   const [user, setUser] = useState({
@@ -30,7 +31,7 @@ const AdminLogin = () => {
     
 
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/admin/adminLogin`,
+        `${BASE_URL}/admin/adminLogin`,
         user,
         { headers: { "Content-Type": "application/json" } }
       );

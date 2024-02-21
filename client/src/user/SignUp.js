@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-
+import { BASE_URL } from "../utils/constants";
 
 const SignupForm = () => {
   const [user, setuser] = useState({
@@ -69,7 +69,7 @@ const SignupForm = () => {
 
 
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/users/signup`,
+        `${BASE_URL}/users/signup`,
         userToSend,
         { headers: { "Content-Type": "application/json" } }
       );

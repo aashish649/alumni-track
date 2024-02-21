@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { FaRegComment } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
+import { BASE_URL } from "../utils/constants";
 
 const CommunityHelper = ({ post }) => {
   const { loggedInUserDetails } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const CommunityHelper = ({ post }) => {
   const handleLike = async () => {
     try {
       const userToken = localStorage.getItem("token");
-      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/post/like/${post._id}`, {
+      await axios.get(`${BASE_URL}/post/like/${post._id}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -44,7 +45,7 @@ const CommunityHelper = ({ post }) => {
   const handleUnlike = async () => {
     try {
       const userToken = localStorage.getItem("token");
-      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/post/dislike/${post._id}`, {
+      await axios.get(`${BASE_URL}/post/dislike/${post._id}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -59,7 +60,7 @@ const CommunityHelper = ({ post }) => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/post/comment/${post._id}`,
+        `${BASE_URL}/post/comment/${post._id}`,
         { content: commentInput },
         {
           headers: {
@@ -80,7 +81,7 @@ const CommunityHelper = ({ post }) => {
     try {
       const userToken = localStorage.getItem("token");
       await axios.delete(
-        `https://alumni-server-beta.vercel.app/api/v1/post/deletepost/${post._id}`,
+        `${BASE_URL}/post/deletepost/${post._id}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

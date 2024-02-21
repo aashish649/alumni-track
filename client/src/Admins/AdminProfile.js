@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { BASE_URL } from "../utils/constants";
 
 const AdminProfile = ({ user_Id, onClose }) => {
   const [user, setUser] = useState(null);
@@ -9,7 +10,7 @@ const AdminProfile = ({ user_Id, onClose }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/users/getUser`
+          `${BASE_URL}/users/getUser`
         );
         const users = response.data;
 
@@ -33,7 +34,7 @@ const AdminProfile = ({ user_Id, onClose }) => {
       try {
         const token = localStorage.getItem("adminToken");
         await axios.delete(
-          `https://alumni-server-beta.vercel.app/api/v1/admin/deleteuser/${user_Id}`,
+          `${BASE_URL}/admin/deleteuser/${user_Id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

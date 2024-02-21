@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Notifications = () => {
   const [notices, setNotices] = useState([]);
@@ -8,7 +9,7 @@ const Notifications = () => {
     const fetchAllNotices = async () => {
       try {
         const response = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/users/allnotice`
+          `${BASE_URL}/users/allnotice`
         );
         setNotices(response.data.notices);
       } catch (error) {
@@ -30,7 +31,7 @@ const Notifications = () => {
             <p className="text-gray-600">{notice.content}</p>
             <div className="mt-2">
               <a
-                href={`http://localhost:4000/api/v1/users/controllers/pdfuploads/${notice.pdf.filename}`}
+                href={`${BASE_URL}/users/controllers/pdfuploads/${notice.pdf.filename}`}
                 download
                 className="bg-gradient-to-r font-semibold from-red-400 to-amber-300 text-black p-2 rounded inline-flex items-center"
               >

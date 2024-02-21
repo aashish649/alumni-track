@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const AuthContext = createContext();
 
@@ -22,7 +23,7 @@ const AuthContextProvider = ({ children }) => {
       }
 
       const userLoggedInRes = await axios.get(
-        `https://alumni-server-beta.vercel.app/api/v1/users/userloggedin`,
+        `${BASE_URL}/users/userloggedin`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +35,7 @@ const AuthContextProvider = ({ children }) => {
         setIsUserLoggedIn(true);
 
         const userResponse = await axios.get(
-          `https://alumni-server-beta.vercel.app/api/v1/users/userlogged`,
+          `${BASE_URL}/users/userlogged`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -68,7 +69,7 @@ const AuthContextProvider = ({ children }) => {
       }
 
       const adminLoggedInRes = await axios.get(
-        `https://alumni-server-beta.vercel.app/api/v1/admin/adminLoggedIn`,
+        `${BASE_URL}/admin/adminLoggedIn`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

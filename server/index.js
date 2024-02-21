@@ -34,6 +34,7 @@ app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/post", postRouter);
 
 
+
 app.use('/api/v1/users/controllers/pdfuploads', express.static(path.join(__dirname, 'controllers', 'pdfuploads')));
 
 app.get('/api/v1/users/controllers/pdfuploads', (req, res) => {

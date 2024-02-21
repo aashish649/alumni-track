@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams,useNavigate } from "react-router-dom"; 
 import { ToastContainer, toast } from "react-toastify";
+import { BASE_URL } from "../utils/constants";
 
 const UserPassword = () => {
   const { user_id } = useParams();
@@ -15,7 +16,7 @@ const UserPassword = () => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/users/userpassword/${user_id}`,
+        `${BASE_URL}/users/userpassword/${user_id}`,
         {
           currentPassword,
           newPassword,
