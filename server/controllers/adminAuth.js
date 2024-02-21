@@ -222,59 +222,69 @@ const client = twilio(accountSid, authToken);
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-const sendOtp = async(mobileNumber, otp,res) => {
+const sendOtp = async (mobileNumber, otp, res) => {
   try {
     console.log(`Sending OTP: ${otp} to +91${mobileNumber}`);
     await client.messages.create({
       body: `Your OTP for password reset is: ${otp}. This OTP will expire in 10 minutes.`,
-      from:`+1${phone_Number}`,
+      from: `+1${phone_Number}`,
       to: `+91${mobileNumber}`,
     });
-  } catch (error) {
-    console.error("Error in sending OTP",error);
-    return res.status(500).json({
-      success:false,
-      message:"server errror",
-    });
-  };
-};
-const resetAdminPass = async (req,res)  => {
-  try {
-    const {mobileNumber} = req.body;
 
-    if(!mobileNumber){
-      return res.status(401).json({
-        success:false,
-        message:"Mobile number is required",
-      });
-    }
-
-    const admin = await Admin.findOne({mobileNo:mobileNumber});
-
-    if(!admin){
-      return res.status(401).json({
-        success:false,
-        message:"Admin not found",
-      });
-    }
-
-    const otp = generateOTP();
-
-    await Admin.updateOne({ _id: admin._id }, { otp, otpExpiration: new Date(Date.now() + 600000) });
-
-    sendOtp(mobileNumber,otp,res);
     return res.status(200).json({
       success: true,
       message: "Otp sent successfully",
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error in sending OTP", error);
     return res.status(500).json({
-      success:false,
-      message:"Error in sending Otp",
+      success: false,
+      message: "server error",
     });
   }
 };
+
+const resetAdminPass = async (req, res) => {
+  try {
+    const { mobileNumber } = req.body;
+
+    if (!mobileNumber) {
+      return res.status(401).json({
+        success: false,
+        message: "Mobile number is required",
+      });
+    }
+
+    const admin = await Admin.findOne({ mobileNo: mobileNumber });
+
+    if (!admin) {
+      return res.status(401).json({
+        success: false,
+        message: "Admin not found",
+      });
+    }
+
+    const otp = generateOTP();
+
+    await Admin.updateOne(
+      { _id: admin._id },
+      { otp, otpExpiration: new Date(Date.now() + 600000) }
+    );
+
+    await sendOtp(mobileNumber, otp, res); 
+
+    
+  } catch (error) {
+    console.error(error);
+
+   
+    return res.status(500).json({
+      success: false,
+      message: "Error in sending Otp",
+    });
+  }
+};
+
 
 const verifyOtp = async (req,res) => {
   try {
