@@ -46,10 +46,9 @@ const ForgotPassword = () => {
           position: 'top-center',
         });
       } else {
-        const res = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/users/changepassword/${id}/${token}`, {
+        const res = await axios.post(`https://alumni-server-one.vercel.app/api/v1/users/changepassword/${id}/${token}`, {
           newPassword:password,
         });
-
         if (res.status === 200) {
           setPassword('');
           setMessage('Password successfully updated');

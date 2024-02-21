@@ -67,10 +67,10 @@ userRouter.post("/changepassword/:id/:token", changePassword);
 userRouter.get("/userloggedin", authUser, userloggedin);
 userRouter.get("/searchUser", authUser, searchUser);
 userRouter.post("/faq", authUser, askQuestion);
+userRouter.put("/:user_id/updateProfile", authUser, updateProfile);
 userRouter.get("/:user_id", authUser, getUserData);
 userRouter.post('/:user_id/uploadProfileImage', cloudinaryUploadpro.single('file'), uploadProfileImage);
 userRouter.get("/userprofile/:user_id", authUser, userProfile);
-userRouter.put("/:user_id/updateProfile", authUser, updateProfile);
 userRouter.post("/userpassword/:user_id", authUser, userPassword);
 
 // admin

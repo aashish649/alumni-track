@@ -31,7 +31,7 @@ const SendEmails = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await axios.post(
-        `https://alumni-server-beta.vercel.app/api/v1/admin/sendemail`,
+        `${BASE_URL}/admin/sendemail`,
         {
           to: to === "specific" ? selectedUser : to,
           from,

@@ -6,8 +6,7 @@ const ProfileImage = ({ user, setUser }) => {
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
   const { user_id } = useParams();
-  console.log("profileimagesection", user_id);
-
+ 
   const handleImageUpload = async () => {
     try {
       if (file) {
@@ -17,7 +16,7 @@ const ProfileImage = ({ user, setUser }) => {
         const userToken = localStorage.getItem("token");
       
         const response = await axios.post(
-          `http://localhost:4000/api/v1/users/${user_id}/uploadProfileImage`, 
+          `${BASE_URL}/users/${user_id}/uploadProfileImage`, 
           formData,
           {
             headers: {

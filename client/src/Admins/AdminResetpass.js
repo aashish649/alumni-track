@@ -33,6 +33,7 @@ const AdminResetpass = () => {
         setTimeout(() => {
           navigate("/adminforgotpass");
         }, 2000);
+        console.log("OTP sent",mobileNo);
       } else {
         toast.error(response.data.message, {
           position: 'top-center',

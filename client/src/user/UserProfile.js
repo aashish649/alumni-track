@@ -15,15 +15,13 @@ const UserProfile = () => {
         const userToken = localStorage.getItem("token");
 
         const response = await axios.get(
-          `http://localhost:4000/users/userprofile/${user_id}`,
+          `${BASE_URL}/users/userprofile/${user_id}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
             },
           }
         );
-       
-
         const userData = response.data.user;
 
         setUser(userData);

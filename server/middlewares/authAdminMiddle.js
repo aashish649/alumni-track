@@ -10,7 +10,7 @@ const authAdmin = (req, res, next) => {
     const tokenFromBody = req.body.token;
     const token = tokenFromHeaders || tokenFromCookies || tokenFromBody;
 
-  
+  console.log("ADmin token",token);
 
     if (!token) {
       return res.status(403).json({

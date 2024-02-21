@@ -17,11 +17,10 @@ const UpdateProfile = () => {
     organization: "",
     bio: "",
   });
+
   const { user_id } = useParams();
   const navigate = useNavigate();
-  const {loggedInUserDetails } = useContext(Authcontext);
-  
-
+  const { loggedInUserDetails } = useContext(Authcontext);
 
   useEffect(() => {
     const currentUser = async () => {
@@ -35,19 +34,17 @@ const UpdateProfile = () => {
             },
           }
         );
-
-        const userData = response.data.user; 
-
+        const userData = response.data.user;
         setFormData({
-          name: userData.name ,
-          email: userData.email ,
-          rollNo: userData.rollNo ,
+          name: userData.name,
+          email: userData.email,
+          rollNo: userData.rollNo,
           graduationYear: userData.graduationYear,
-          mobileNo: userData.mobileNo ,
-          branch: userData.branch ,
-          designation: userData.designation ,
+          mobileNo: userData.mobileNo,
+          branch: userData.branch,
+          designation: userData.designation,
           organization: userData.organization,
-          bio: userData.bio ,
+          bio: userData.bio,
         });
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -56,7 +53,6 @@ const UpdateProfile = () => {
 
     currentUser();
   }, [user_id]);
-
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -72,20 +68,43 @@ const UpdateProfile = () => {
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
+
       toast.success("Profile updated successfully");
+
+      const updatedResponse = await axios.get(
+        `${BASE_URL}/users/${user_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      const updatedUserData = updatedResponse.data.user;
+
+      setFormData({
+        name: updatedUserData.name,
+        email: updatedUserData.email,
+        rollNo: updatedUserData.rollNo,
+        graduationYear: updatedUserData.graduationYear,
+        mobileNo: updatedUserData.mobileNo,
+        branch: updatedUserData.branch,
+        designation: updatedUserData.designation,
+        organization: updatedUserData.organization,
+        bio: updatedUserData.bio,
+      });
+
       setTimeout(() => {
-      navigate(`/dashboard/${loggedInUserDetails.user._id}`);
-      },2000);
-      console.log(response.data); // Handle success response
+        navigate(`/dashboard/${loggedInUserDetails.user._id}`);
+      }, 2000);
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error("Error updating profile:", error.response.data);
     }
   };
-
   return (
     <div className=" mx-auto  flex justify-center items-center h-full bg-slate-200 overflow-hidden ">
       <div className="w-full max-w-lg border-solid border-2 border-gray-500 rounded-md p-8 mt-8  bg-gradient-to-r from-orange-100 to-amber-100  ">

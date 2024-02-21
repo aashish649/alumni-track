@@ -224,6 +224,7 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 
 const sendOtp = async(mobileNumber, otp,res) => {
   try {
+    console.log(`Sending OTP: ${otp} to +91${mobileNumber}`);
     await client.messages.create({
       body: `Your OTP for password reset is: ${otp}. This OTP will expire in 10 minutes.`,
       from:`+1${phone_Number}`,
@@ -262,10 +263,9 @@ const resetAdminPass = async (req,res)  => {
     await Admin.updateOne({ _id: admin._id }, { otp, otpExpiration: new Date(Date.now() + 600000) });
 
     sendOtp(mobileNumber,otp,res);
-
-    res.status(200).json({
-      success:true,
-      message:"Otp sent successfully",
+    return res.status(200).json({
+      success: true,
+      message: "Otp sent successfully",
     });
   } catch (error) {
     console.error(error);
