@@ -15,7 +15,7 @@ const UserPassword = () => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:4000/api/v1/users/userpassword/${user_id}`,
+        `https://alumni-server-beta.vercel.app/api/v1/users/userpassword/${user_id}`,
         {
           currentPassword,
           newPassword,

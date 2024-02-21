@@ -28,7 +28,7 @@ const AdminSearch = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await axios.get(
-        `http://localhost:4000/api/v1/admin/searchadmin`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/searchadmin`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

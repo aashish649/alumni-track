@@ -14,7 +14,7 @@ const AskQuestion = () => {
       const userId = "userId";
       const userToken = localStorage.getItem("token");
       await axios.post(
-        `http://localhost:4000/api/v1/users/faq`,
+        `https://alumni-server-beta.vercel.app/api/v1/users/faq`,
         { userId, question },
         {
           headers: {

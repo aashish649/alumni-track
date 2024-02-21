@@ -33,7 +33,7 @@ const AdminProfile = ({ user_Id, onClose }) => {
       try {
         const token = localStorage.getItem("adminToken");
         await axios.delete(
-          `http://localhost:4000/api/v1/admin/deleteuser/${user_Id}`,
+          `https://alumni-server-beta.vercel.app/api/v1/admin/deleteuser/${user_Id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -10,7 +10,7 @@ const FaqHelper = ({ question_id }) => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.post(
-        `http://localhost:4000/api/v1/admin/faq/answer/${question_id._id}`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/faq/answer/${question_id._id}`,
         { answer },
         {
           headers: {
@@ -28,7 +28,7 @@ const FaqHelper = ({ question_id }) => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.delete(
-        `http://localhost:4000/api/v1/admin/faq/delete/${question_id._id}`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/faq/delete/${question_id._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

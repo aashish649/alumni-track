@@ -14,7 +14,7 @@ const UserProfile = () => {
         const userToken = localStorage.getItem("token");
 
         const response = await axios.get(
-          `http://localhost:4000/api/v1/users/userprofile/${user_id}`,
+          `https://alumni-server-beta.vercel.app/api/v1/users/userprofile/${user_id}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`,

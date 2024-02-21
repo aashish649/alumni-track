@@ -9,7 +9,7 @@ const AnswerFaq = () => {
     async function fetchPosts() {
       try {
         const token = localStorage.getItem("adminToken");
-        const response = await axios.get(`http://localhost:4000/api/v1/admin/faq/notanswer`,
+        const response = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/admin/faq/notanswer`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const userValid = async () => {
     try {
       
-      const res = await axios.get(`http://localhost:4000/api/v1/users/forgotpassword/${id}/${token}`);
+      const res = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/users/forgotpassword/${id}/${token}`);
      
 
       if (res.status === 200) {
@@ -46,7 +46,7 @@ const ForgotPassword = () => {
           position: 'top-center',
         });
       } else {
-        const res = await axios.post(`http://localhost:4000/api/v1/users/changepassword/${id}/${token}`, {
+        const res = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/users/changepassword/${id}/${token}`, {
           newPassword:password,
         });
 

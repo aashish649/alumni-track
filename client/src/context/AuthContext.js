@@ -22,7 +22,7 @@ const AuthContextProvider = ({ children }) => {
       }
 
       const userLoggedInRes = await axios.get(
-        "http://localhost:4000/api/v1/users/userloggedin",
+        `https://alumni-server-beta.vercel.app/api/v1/users/userloggedin`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ const AuthContextProvider = ({ children }) => {
         setIsUserLoggedIn(true);
 
         const userResponse = await axios.get(
-          "http://localhost:4000/api/v1/users/userlogged",
+          `https://alumni-server-beta.vercel.app/api/v1/users/userlogged`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -68,7 +68,7 @@ const AuthContextProvider = ({ children }) => {
       }
 
       const adminLoggedInRes = await axios.get(
-        "http://localhost:4000/api/v1/admin/adminLoggedIn",
+        `https://alumni-server-beta.vercel.app/api/v1/admin/adminLoggedIn`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

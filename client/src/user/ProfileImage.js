@@ -17,7 +17,7 @@ const ProfileImage = ({ user, setUser }) => {
         const userToken = localStorage.getItem("token");
       
         const response = await axios.post(
-          `http://localhost:4000/api/v1/users/${user_id}/uploadProfileImage`, 
+          `https://alumni-server-beta.vercel.app/api/v1/users/${user_id}/uploadProfileImage`, 
           formData,
           {
             headers: {

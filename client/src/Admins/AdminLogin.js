@@ -30,7 +30,7 @@ const AdminLogin = () => {
     
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/admin/adminLogin`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/adminLogin`,
         user,
         { headers: { "Content-Type": "application/json" } }
       );

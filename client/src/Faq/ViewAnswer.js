@@ -13,7 +13,7 @@ const ViewAnswer = () => {
 
   const fetchallFaqs = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/users/allfaq');
+      const response = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/users/allfaq`);
       setallFaqs(response.data);
     } catch (error) {
       console.error('Error fetching all FAQs:', error.message);

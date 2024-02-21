@@ -28,7 +28,7 @@ const UploadNotice = () => {
       formDataToSend.append("pdf", formData.pdf);
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/admin/uploadnotice`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/uploadnotice`,
         formDataToSend,
         {
           headers: {

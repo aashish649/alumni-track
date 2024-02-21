@@ -16,7 +16,7 @@ const Community = () => {
   const fetchPosts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/v1/post/getallpost`
+        `https://alumni-server-beta.vercel.app/api/v1/post/getallpost`
       );
 
       setPosts(response.data.posts);

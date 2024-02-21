@@ -370,61 +370,20 @@ const changePassword = async (req, res) => {
 };
 
 
+// const imgconfig = multer.diskStorage({
+//   destination: (req, file, callback) => {
+//     callback(null, "./uploads");
+//   },
+//   filename: (req, file, callback) => {
+//     const extname = path.extname(file.originalname).toLowerCase();
+//     callback(null, file.fieldname + '-' + Date.now() + extname);
+//   },
+// });
 
-// const localfileupload = async (req, res) => {
-//   try {
-//     const file =  req.files.file;
 
-//     if (!file) {
-//       return res.status(400).json({
-//         success: false,
-//         message: 'File not provided in the request.',
-//       });
-//     }
-//     const filesFolderPath = "controllers/files";
 
-//     const fileName = `${Date.now()}_${file.name}`;
+const imgconfig = multer.memoryStorage();
 
-//     const filePath = join(filesFolderPath, fileName);
-
-//     file.mv(filePath, (err) => {
-//       if (err) {
-//         console.error(err);
-//         throw new Error("Error moving file");
-//       }
-//     });
-
-//     const photoUrl = `http://localhost:4000/api/v1/users/controllers/files/${fileName}`;
-//     const userId = req.user.user_id;
-//     const user = await User.findByIdAndUpdate(
-//       userId,
-//       {
-//         "photo.url": photoUrl,
-//       },
-//       { new: true }
-//     );
-
-   
-//     res.json({
-//       success: true,
-//       user,
-//       message: "Local File Uploaded Successfully",
-//     });
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).json({ success: false, message: "Failed to upload file" });
-//   }
-// };
-
-const imgconfig = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "./uploads");
-  },
-  filename: (req, file, callback) => {
-    const extname = path.extname(file.originalname).toLowerCase();
-    callback(null, file.fieldname + '-' + Date.now() + extname);
-  },
-});
 const cloudinaryUploadpro = multer({
   storage: imgconfig,
   fileFilter: (req, file, callback) => {
@@ -454,8 +413,7 @@ const uploadProfileImage = async (req, res) => {
     const folderName = 'profile';
 
     try {
-     
-
+    
       const upload = await uploadToCloudinary(req.file.path, folderName);
       const imageUrl = upload.secure_url;
       const imageFilename = upload.public_id;

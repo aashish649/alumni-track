@@ -14,7 +14,7 @@ const SendEmails = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/users/getUser`
+          `https://alumni-server-beta.vercel.app/api/v1/users/getUser`
         );
         setUsers(response.data);
         console.log("send email admin", response.data);
@@ -30,7 +30,7 @@ const SendEmails = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await axios.post(
-        `http://localhost:4000/api/v1/admin/sendemail`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/sendemail`,
         {
           to: to === "specific" ? selectedUser : to,
           from,

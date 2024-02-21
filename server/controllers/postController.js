@@ -6,16 +6,19 @@ const fs = require('fs');
 const { uploadToCloudinary } = require("../utils/cloudinary.js");
 const path = require('path');
 
-const imgconfig = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "./uploads");
-  },
-  filename: (req, file, callback) => {
-    // Ensure a unique filename with timestamp for every file
-    const extname = path.extname(file.originalname).toLowerCase();
-    callback(null, file.fieldname + '-' + Date.now() + extname);
-  },
-});
+// const imgconfig = multer.diskStorage({
+//   destination: (req, file, callback) => {
+//     callback(null, "./uploads");
+//   },
+//   filename: (req, file, callback) => {
+//     // Ensure a unique filename with timestamp for every file
+//     const extname = path.extname(file.originalname).toLowerCase();
+//     callback(null, file.fieldname + '-' + Date.now() + extname);
+//   },
+// });
+
+
+const imgconfig = multer.memoryStorage();
 
 const cloudinaryUpload = multer({
   storage: imgconfig,
@@ -48,6 +51,12 @@ const createPost = async (req, res) => {
       imageUrl = req.file.path;
       imageFilename = req.file.filename;
     }
+
+    console.log("File path:", req.file.path);
+    console.log("Image URL:", imageUrl);
+    console.log("Image Filename:", imageFilename);
+
+
 
     try {
       if (req.file) {

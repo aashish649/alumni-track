@@ -9,7 +9,7 @@ const Profile = ({ userId, onClose }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/users/getUser`
+          `https://alumni-server-beta.vercel.app/api/v1/users/getUser`
         );
         const users = response.data;
 

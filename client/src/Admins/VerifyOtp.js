@@ -9,7 +9,7 @@ const VerifyOtp = () => {
   const navigate = useNavigate();
   const verifyOtp = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/admin/verifyotp', {
+      const response = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/admin/verifyotp`, {
         mobileNumber: mobileNo,
         otp: otp,
       });

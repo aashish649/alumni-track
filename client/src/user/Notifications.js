@@ -8,7 +8,7 @@ const Notifications = () => {
     const fetchAllNotices = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/users/allnotice`
+          `https://alumni-server-beta.vercel.app/api/v1/users/allnotice`
         );
         setNotices(response.data.notices);
       } catch (error) {

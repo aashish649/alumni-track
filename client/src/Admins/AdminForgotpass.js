@@ -13,7 +13,7 @@ const AdminForgotPass = () => {
   const verifyOtp = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/admin/verifyotp",
+        `https://alumni-server-beta.vercel.app/api/v1/admin/verifyotp`,
         {
           mobileNumber: mobileNo,
           otp: otp,

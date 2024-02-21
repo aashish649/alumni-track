@@ -14,7 +14,7 @@ const Dashboard = () => {
   const { loggedInUserDetails } = useContext(AuthContext);
 
   useEffect(() => {
-    const socket = io("http://localhost:4000", { transports: ['websocket'] });
+    const socket = io(`https://alumni-server-beta.vercel.app/`, { transports: ['websocket'] });
     socket.on('connect', () => {
       console.log('Socket connected:', socket.id);
     });
@@ -39,7 +39,7 @@ const Dashboard = () => {
     try {
       const userToken = localStorage.getItem("token");
       localStorage.removeItem("token");
-      await axios.get("http://localhost:4000/api/v1/users/logout", {
+      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/users/logout`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -51,7 +51,7 @@ const Dashboard = () => {
   };
   return (
     <div className="mx-auto h-full bg-slate-100">
-      <Link to="/dashboard">
+      <Link  to={`/dashboard/${loggedInUserDetails.user._id}`}>
         <nav className="bg-amber-100 p-4 box-border top-0 sticky z-50 ml-1 mr-1 rounded-lg border-red-400 shadow-lg">
           <div className="container mx-auto flex justify-between items-center max-w-screen-xl">
             <div className="flex items-center">

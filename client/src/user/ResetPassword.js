@@ -21,7 +21,7 @@ const ResetPassword = () => {
         });
         return;
       }
-      const response = await axios.post(`http://localhost:4000/api/v1/users/resetpassword`, { email });
+      const response = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/users/resetpassword`, { email });
       if (response.data.success) {
         setEmail('');
         setMessage('Password reset link sent successfully to your email');

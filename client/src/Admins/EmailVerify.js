@@ -11,7 +11,7 @@ const EmailVerify = ({ mobileNo, verificationToken }) => {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/admin/verifyEmail/${mobileNo}/${verificationToken}`, {
+        const response = await axios.get(`https://alumni-server-beta.vercel.app/api/v1/admin/verifyEmail/${mobileNo}/${verificationToken}`, {
           responseType: 'text',
         });
 

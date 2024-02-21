@@ -30,7 +30,7 @@ const CommunityHelper = ({ post }) => {
   const handleLike = async () => {
     try {
       const userToken = localStorage.getItem("token");
-      await axios.get(`http://localhost:4000/api/v1/post/like/${post._id}`, {
+      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/post/like/${post._id}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -44,7 +44,7 @@ const CommunityHelper = ({ post }) => {
   const handleUnlike = async () => {
     try {
       const userToken = localStorage.getItem("token");
-      await axios.get(`http://localhost:4000/api/v1/post/dislike/${post._id}`, {
+      await axios.get(`https://alumni-server-beta.vercel.app/api/v1/post/dislike/${post._id}`, {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
@@ -59,7 +59,7 @@ const CommunityHelper = ({ post }) => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:4000/api/v1/post/comment/${post._id}`,
+        `https://alumni-server-beta.vercel.app/api/v1/post/comment/${post._id}`,
         { content: commentInput },
         {
           headers: {
@@ -80,7 +80,7 @@ const CommunityHelper = ({ post }) => {
     try {
       const userToken = localStorage.getItem("token");
       await axios.delete(
-        `http://localhost:4000/api/v1/post/deletepost/${post._id}`,
+        `https://alumni-server-beta.vercel.app/api/v1/post/deletepost/${post._id}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

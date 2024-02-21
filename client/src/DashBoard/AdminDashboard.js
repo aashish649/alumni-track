@@ -12,7 +12,7 @@ const AdminDashboard = () => {
       const adminToken = localStorage.getItem("adminToken");
 
       localStorage.removeItem("adminToken");
-      await axios.get("http://localhost:4000/api/v1/admin/Adminlogout", {
+      await axios.get("https://alumni-server-beta.vercel.app/api/v1/admin/Adminlogout", {
         headers: {
           Authorization: `Bearer ${adminToken}`,
         },

@@ -48,7 +48,7 @@ const AdminSignup = () => {
      
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/admin/adminSignup`,
+        `https://alumni-server-beta.vercel.app/api/v1/admin/adminSignup`,
         userToSend,
         { headers: { "Content-Type": "application/json" } }
       );

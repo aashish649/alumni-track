@@ -23,7 +23,7 @@ const AdminResetpass = () => {
         return;
       }
 
-      const response = await axios.post(`http://localhost:4000/api/v1/admin/resetadminpass`,
+      const response = await axios.post(`https://alumni-server-beta.vercel.app/api/v1/admin/resetadminpass`,
       {mobileNumber:mobileNo}
       );
       if (response.data.success) {

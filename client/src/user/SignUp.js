@@ -69,7 +69,7 @@ const SignupForm = () => {
 
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/users/signup`,
+        `https://alumni-server-beta.vercel.app/api/v1/users/signup`,
         userToSend,
         { headers: { "Content-Type": "application/json" } }
       );

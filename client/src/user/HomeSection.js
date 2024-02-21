@@ -13,7 +13,7 @@ const HomeSection = () => {
     try {
       const userToken = localStorage.getItem("token");
       const response = await axios.get(
-        `http://localhost:4000/api/v1/users/${user_id}`,
+        `https://alumni-server-beta.vercel.app/api/v1/users/${user_id}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

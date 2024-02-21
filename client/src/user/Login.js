@@ -33,7 +33,7 @@ const LoginForm = () => {
     try {
   
       const response = await axios.post(
-        `http://localhost:4000/api/v1/users/login`,
+        `https://alumni-server-beta.vercel.app/api/v1/users/login`,
         user,
         { headers: { "Content-Type": "application/json" } }
       );
