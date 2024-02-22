@@ -161,7 +161,6 @@ const UserPost = ({}) => {
               </div>
             )}
           </div>
-
           <div className="flex items-center mb-2">
             <button
               className={`p-2 rounded ${

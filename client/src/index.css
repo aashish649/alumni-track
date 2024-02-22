@@ -13,5 +13,18 @@
     }
   }
 
+/* index.css */
+/* index.css */
+.dark {
+  background-color: #0051f398; /* Dark background color */
+  color: #d1d5db; /* Light text color */
+}
+
+/* Additional styles for links and other elements */
+.dark a {
+  color: #a3bffa; /* Link color in dark mode */
+}
+
+
 
 

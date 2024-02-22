@@ -14,4 +14,38 @@
       background-color: #4682B4; 
     }
   }
+  body {
+    background-color: #ffffff; /* Light mode background color */
+    color: #000000; /* Light mode text color */
+  }
+  
+
+.dark {
+  background: linear-gradient(90deg, rgb(8, 6, 34) 0%, rgba(0,0,12,1) 26%, rgb(0, 8, 17) 97%);
+  color: #d1d5db; 
+
+  
+  border: 1px solid #4a5568; 
+
+  
+  a {
+    color: #2b63db; /* Link color in dark mode */
+    text-decoration: underline;
+  }
+
+  
+  .btn {
+    background: linear-gradient(to right, #110665, #290ef9); 
+    color: #fff; 
+    border: 1px solid #120464; 
+  }
+
+
+  input {
+    background: linear-gradient(to right, #d8e6ff, #fafdff); 
+    color: #000000; 
+    border: 1px solid #6b7280; 
+  }
+}
+
 

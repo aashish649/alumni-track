@@ -35,6 +35,7 @@ import AdminResetpass from "./Admins/AdminResetpass";
 import AdminForgotPass from "./Admins/AdminForgotpass";
 import UserPassword from "./user/UserPassword";
 import ProfileImage from "./user/ProfileImage";
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 const UserPrivateRoute = ({ element }) => {
   const { isUserLoggedIn } = useContext(AuthContext);
@@ -129,11 +130,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
-    </>
+    <DarkModeProvider>
+    <AuthContextProvider>
+      <RouterProvider router={router}>
+        <Routes />
+      </RouterProvider>
+    </AuthContextProvider>
+  </DarkModeProvider>
   );
 }
 
