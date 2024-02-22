@@ -40,7 +40,7 @@ const HomeSection = () => {
             <ProfileImage user={user} setUser={setUser} />
             <hr className="my-4" />
             <div className="text-left">
-              <table className="mx-auto border border-collapse border-gray-600 p-4 text-lg ">
+              <table className="mx-auto border border-collapse border-gray-600 p-2 sm:p-4 text-sm sm:text-lg ">
                 <tbody>
                   <tr className="border-b border-gray-600 p-3">
                     <td className="pr-4 pb-2 pl-2 font-bold border-r border-gray-500 w-52">
@@ -93,7 +93,7 @@ const HomeSection = () => {
                 </tbody>
               </table>
             </div>
-            <div className="bg-ivory my-4 p-4 h-40 overflow-y-auto mb-2">
+            <div className="bg-ivory my-4 p-2 sm:p-4 h-4 overflow-y-auto mb-2">
               <b>BIO</b>
               <hr />
               {user.bio}
