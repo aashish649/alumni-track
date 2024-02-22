@@ -95,7 +95,9 @@ const SearchUser = () => {
               name="branch"
               value={branch}
               onChange={handleChange}
-              className={`w-full p-2 border ${screen.width < 500 ? 'text-sm' : ''}`}
+              className={`w-full p-2 border ${
+                window.innerWidth < 500 ? 'text-sm' : ''
+              }`}
             >
               <option value="">Select</option>
               <option value="Computer Science Engineering">Computer Science Engineering</option>
