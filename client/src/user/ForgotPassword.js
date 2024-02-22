@@ -1,31 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, NavLink } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { FiEye } from "react-icons/fi";
+import { FiEyeOff } from "react-icons/fi";
 
 const ForgotPassword = () => {
   const { id, token } = useParams();
   const navigate = useNavigate();
 
   const [data, setData] = useState(false);
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const userValid = async () => {
     try {
-      
-      const res = await axios.get(`${BASE_URL}/users/forgotpassword/${id}/${token}`);
-     
+      const res = await axios.get(
+        `${BASE_URL}/users/forgotpassword/${id}/${token}`
+      );
 
       if (res.status === 200) {
-        console.log('User is valid');
+        console.log("User is valid");
       } else {
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
-      console.error('Error:', error);
-      navigate('/');
+      console.error("Error:", error);
+      navigate("/");
     }
   };
 
@@ -37,31 +44,34 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     try {
-      if (password === '') {
-        toast.error('Password is required!', {
-          position: 'top-center',
+      if (password === "") {
+        toast.error("Password is required!", {
+          position: "top-center",
         });
       } else if (password.length < 6) {
-        toast.error('Password must be at least 6 characters!', {
-          position: 'top-center',
+        toast.error("Password must be at least 6 characters!", {
+          position: "top-center",
         });
       } else {
-        const res = await axios.post(`${BASE_URL}/users/changepassword/${id}/${token}`, {
-          newPassword:password,
-        });
+        const res = await axios.post(
+          `${BASE_URL}/users/changepassword/${id}/${token}`,
+          {
+            newPassword: password,
+          }
+        );
         if (res.status === 200) {
-          setPassword('');
-          setMessage('Password successfully updated');
+          setPassword("");
+          setMessage("Password successfully updated");
         } else {
-          toast.error('Error updating password. Please try again.', {
-            position: 'top-center',
+          toast.error("Error updating password. Please try again.", {
+            position: "top-center",
           });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Error updating password. Please try again.', {
-        position: 'top-center',
+      console.error("Error:", error);
+      toast.error("Error updating password. Please try again.", {
+        position: "top-center",
       });
     }
   };
@@ -85,26 +95,45 @@ const ForgotPassword = () => {
             </div>
             <form className="mt-8 space-y-6" onSubmit={sendPassword}>
               {message && (
-                <p className={`text-${message.includes('successfully') ? 'green' : 'red'}-500 font-bold`}>
+                <p
+                  className={`text-${
+                    message.includes("successfully") ? "green" : "red"
+                  }-500 font-bold`}
+                >
                   {message}
                 </p>
               )}
+
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
                   <label htmlFor="password" className="sr-only">
                     New Password
                   </label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="new-password"
-                    required
-                    value={password}
-                    onChange={setVal}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="New Password"
-                  />
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      placeholder="New Password"
+                      autoComplete="new-password"
+                      required
+                      value={password}
+                      onChange={setVal}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        right: "10px",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={handleTogglePassword}
+                    >
+                      {showPassword ? <FiEyeOff /> : <FiEye />}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -138,4 +167,3 @@ const ForgotPassword = () => {
 };
 
 export default ForgotPassword;
-

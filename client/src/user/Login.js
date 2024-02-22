@@ -6,13 +6,18 @@ import { useNavigate } from "react-router-dom";
 import Authcontext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
-
+import { FiEye } from "react-icons/fi";
+import { FiEyeOff } from "react-icons/fi";
 
 const LoginForm = () => {
   const [user, setuser] = useState({
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,7 +49,7 @@ const LoginForm = () => {
         const token = response.data.token;
         console.log("User token ",token);
 
-        // Save the token in local storage
+       
         localStorage.setItem("token", token);
         
         await checkUserLoginStatus();
@@ -111,15 +116,29 @@ const LoginForm = () => {
         >
           Password:
         </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required
-        />
+        <div style={{ position: 'relative' }}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            id="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+          <span
+            style={{
+              position: 'absolute',
+              top: '50%',
+              right: '10px',
+              transform: 'translateY(-50%)',
+              cursor: 'pointer',
+            }}
+            onClick={handleTogglePassword}
+          >
+            {showPassword ? <FiEyeOff /> : <FiEye />}
+          </span>
+        </div>
 
         <button
           type="submit"

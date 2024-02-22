@@ -18,19 +18,19 @@ const Body = () => {
   };
 
   return (
-    <div>
-      <div className="object-cover flex flex-col items-center justify-center  max-w-screen-md mx-auto">
+    <div className="max-w-screen-md mx-auto">
+      <div className="object-cover flex flex-col items-center justify-center mt-4">
         <TextEffect />
         <Slider {...settings} className="w-full max-w-screen-lg mt-4">
           {images.map((image, index) => (
             <div
               key={index}
-              className="h-96 w-96 overflow-hidden rounded-md shadow-lg"
+              className="h-64 sm:h-96 md:h-96 lg:h-96 xl:h-96 w-full sm:w-96 md:w-96 lg:w-96 xl:w-96 overflow-hidden rounded-md shadow-lg"
             >
               <img
                 src={image}
                 alt={`Slide ${index + 1}`}
-                className="w-full h-full  object-cover rounded-md"
+                className="w-full h-full object-cover rounded-md"
               />
             </div>
           ))}
