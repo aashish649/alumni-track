@@ -17,8 +17,8 @@ const PORT = process.env.PORT || 3000;
 
 
 app.use(cors({
+  origin:["https://alumni-track.vercel.app"],
   credentials: true,
-  origin:true,
 }));
 
 app.use(cookieParser());

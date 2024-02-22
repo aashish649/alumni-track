@@ -271,7 +271,7 @@ const resetPassword = async (req, res) => {
     const updatedUser = await User.findOne({ _id: user._id });
     console.log("Updated User Document:", updatedUser);
 
-    const resetLink = `http://localhost:3000/forgotpassword/${user._id}/${resetToken}`;
+    const resetLink = `https://alumni-track.vercel.app/forgotpassword/${user._id}/${resetToken}`;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
