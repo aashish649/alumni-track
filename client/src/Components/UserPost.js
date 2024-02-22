@@ -108,26 +108,25 @@ const UserPost = ({}) => {
     <div className="bg-gradient-to-r from-orange-100 to-amber-100 overflow-hidden p-4 rounded-md shadow-md max-w-md mx-auto mt-8">
       {post !== null && (
         <>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center">
-              <img
-                src={post.user.photo.url}
-                alt="User Profile"
-                className="w-16 h-16 rounded-full mr-4"
-              />
-              <div>
-                <p className="font-bold text-lg">
-                  <Link to={`/userprofile/${post.user._id}`}>
-                    {post.user.name}
-                  </Link>
-                </p>
-                <div className="text-xs">
-                <p>{post.user.designation}</p>
-                <p>{post.user.organization}</p>
-                </div>
-              </div>
+          <div className={`flex flex-col mb-4 ${window.innerWidth < 700 ? 'max-w-sm' : 'max-w-md'}`}>
+        <div className="flex items-center mb-2">
+          <img
+            src={post.user.photo.url}
+            alt="User Profile"
+            className="w-16 h-16 rounded-full mr-4"
+          />
+          <div>
+            <p className="font-bold text-lg">
+              <Link to={`/userprofile/${post.user._id}`}>
+                {post.user.name}
+              </Link>
+            </p>
+            <div className="text-xs">
+              <p>{post.user.designation}</p>
+              <p>{post.user.organization}</p>
             </div>
-
+          </div>
+        </div>
             <div className="text-sm">
               <p>
                 {new Date(post.createdAt).toLocaleTimeString([], {

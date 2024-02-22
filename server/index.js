@@ -15,9 +15,10 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+// ["https://alumni-track.vercel.app"],
 
 app.use(cors({
-  origin:["https://alumni-track.vercel.app"],
+  origin:["http://localhost:3000"],
   credentials: true,
 }));
 

@@ -50,9 +50,6 @@ const AdminPrivateRoute = ({ element }) => {
 };
 
 const router = createBrowserRouter([
-  {path:"/forgotpassword/:id/:token", element:<ForgotPassword/>},
-  { path: "/admin/verifyEmail/:token", element: <EmailVerify /> },
-  { path: "/dashboard/:user_id", element: <UserPrivateRoute element={<DashBoard />} /> },
   
   {
     path: "/",
@@ -70,6 +67,10 @@ const router = createBrowserRouter([
       {path:"/adminforgotpass",element:<AdminForgotPass/>},
     ],
   },
+  {path:"/forgotpassword/:id/:token", element:<ForgotPassword/>},
+  { path: "/admin/verifyEmail/:token", element: <EmailVerify /> },
+  { path: "/dashboard/:user_id", element: <UserPrivateRoute element={<DashBoard />} /> },
+  
   {
     path:"/notifications",
     element:<UserPrivateRoute element={<Notifications/>}/>

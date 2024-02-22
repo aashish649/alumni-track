@@ -7,19 +7,12 @@ import HomeSection from "../user/HomeSection";
 import AuthContext from "../context/AuthContext";
 import { io } from "socket.io-client";
 import { BASE_URL } from '../utils/constants';
-import { useDarkMode } from "../context/DarkModeContext";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const Dashboard = () => {
   const [newNotices, setNewNotices] = useState([]);
   const navigate = useNavigate();
   const { loggedInUserDetails } = useContext(AuthContext);
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
-
-  useEffect(() => {
-    document.body.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
-
+ 
 
   const handleLogout = async () => {
     try {
@@ -48,11 +41,6 @@ const Dashboard = () => {
               <Link to="/alumni" className="text-black text-2xl font-bold mb-4">
                 Alumni Tracker
               </Link>
-            <DarkModeSwitch
-              checked={isDarkMode}
-              onChange={toggleDarkMode}
-              size={30}
-            />
             </div>
 
             <div className="lg:hidden">
