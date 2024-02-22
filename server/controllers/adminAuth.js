@@ -89,7 +89,7 @@ const verifyEmail = async (req, res) => {
     console.log("Received mobile number:", mobileNo);
     console.log("Received verification token:", verificationToken);
 
-    // Decode the token payload
+    
     jwt.verify(
       verificationToken,
       process.env.JWT_SECRET,
@@ -123,7 +123,7 @@ const verifyEmail = async (req, res) => {
         admin.isVerified = true;
         admin.hodVerified = true;
 
-        // Save the changes in the database
+       
         await admin.save();
 
         return res.status(200).json({
