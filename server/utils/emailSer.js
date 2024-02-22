@@ -10,7 +10,7 @@ const sendVerificationEmail = async (adminmobileNo, verificationToken) => {
       },
     });
 
-    const verificationLink = `https://alumni-track.vercel.app/api/v1/admin/verifyEmail/${encodeURIComponent(adminmobileNo)}/${verificationToken}`;
+    const verificationLink = `https://alumni-server-alpha.vercel.app/api/v1/admin/verifyEmail/${encodeURIComponent(adminmobileNo)}/${verificationToken}`;
 
     const mailOptions = {
       from: process.env.EMAIL,
