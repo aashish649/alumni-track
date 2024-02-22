@@ -93,7 +93,7 @@ const HomeSection = () => {
                 </tbody>
               </table>
             </div>
-            <div className="bg-ivory my-4 p-2 sm:p-4 h-4 overflow-y-auto mb-2">
+            <div className="bg-ivory my-4 p-2 sm:p-4 mb-2">
               <b>BIO</b>
               <hr />
               {user.bio}
