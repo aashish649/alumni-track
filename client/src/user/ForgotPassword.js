@@ -46,7 +46,7 @@ const ForgotPassword = () => {
           position: 'top-center',
         });
       } else {
-        const res = await axios.post(`${BASE_URL}/api/v1/users/changepassword/${id}/${token}`, {
+        const res = await axios.post(`${BASE_URL}/users/changepassword/${id}/${token}`, {
           newPassword:password,
         });
         if (res.status === 200) {
