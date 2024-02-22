@@ -53,8 +53,13 @@ const LoginForm = () => {
         localStorage.setItem("token", token);
         
         await checkUserLoginStatus();
-        navigate(`/dashboard/${loggedInUserDetails.user._id}`);
-        toast.success("Login Successful!");
+        
+        if (loggedInUserDetails && loggedInUserDetails.user) {
+          navigate(`/dashboard/${loggedInUserDetails.user._id}`);
+          toast.success("Login Successful!");
+        } else {
+          console.error("Invalid loggedInUserDetails:", loggedInUserDetails);
+        }
 
       } else {
         setSuccess(true);
