@@ -51,12 +51,12 @@ const AboutUs = () => {
         
         <div className="text-center">
           <img
-            src="https://m.media-amazon.com/images/M/MV5BNzlmZWI2YjAtOGQ3ZC00NTFjLThkMzItYTRiOGFiNzFjOTdlXkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_.jpg"
+            src="/img3.jpg"
             alt="Contributor"
             className="w-28 h-28 object-cover rounded-full mb-2 m-3"
           />
           <p>Neha kumari</p>
-          <a href="linkedin_url_3" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/neha-kumari-7288a7187/" target="_blank" rel="noopener noreferrer">
           <span className='text-red-500'>LinkedIn</span>
           </a>
           <p>Full Stack Developer</p>
