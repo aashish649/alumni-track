@@ -14,14 +14,90 @@ const multer = require("multer");
 const fs = require('fs');
 const path = require('path');
 
+// const signup = async (req, res) => {
+//   try {
+//     const { name, rollNo, graduationYear, email, mobileNo, branch, password } =
+//       req.body;
+
+//     console.log("Received Request Body user:", req.body);
+
+//     // check if the user's email is already registered
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "User already exists",
+//       });
+//     }
+
+//     // Secure the password
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const newUser = await User.create({
+//       name,
+//       rollNo: parseInt(rollNo),
+//       graduationYear: parseInt(graduationYear),
+//       email: email.toLowerCase(),
+//       mobileNo: parseInt(mobileNo),
+//       branch,
+//       password: hashedPassword,
+//     });
+
+//     // Send welcome email to the user
+//     try {
+//       const transporter = nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//           user: process.env.EMAIL,
+//           pass: process.env.PASSWORD,
+//         },
+//       });
+
+//       const message = `Welcome to the Alumni Tracking System,
+//       Hello ${name} Congratulations on joining the Alumni Tracking System of National Institute Of Technology,Patna.We are thrilled to have you as part of our alumni community.`;
+
+//       const mailOptions = {
+//         from: process.env.EMAIL,
+//         to: email,
+//         subject: "Welcome to Alumni Tracking system",
+//         text: message,
+//       };
+
+//       const info = await transporter.sendMail(mailOptions);
+//       // console.log("Email sent:",info.response);
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json({
+//         success: false,
+//         error: "Error while sending mail",
+//       });
+//     }
+//     res.status(200).json({
+//       success: true,
+//       messages: ["Signed up successfully", "Email sent successfully"],
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     console.error(error);
+//     return res.status(500).json({
+//       success: false,
+//       error: "User cannot be registered, Please try again later",
+//       details: error.message,
+//     });
+//   }
+// };
+
+// Login
+
+
+
 const signup = async (req, res) => {
   try {
-    const { name, rollNo, graduationYear, email, mobileNo, branch, password } =
-      req.body;
+    const { name, rollNo, graduationYear, email, mobileNo, branch, password } = req.body;
 
     console.log("Received Request Body user:", req.body);
 
-    // check if the user's email is already registered
+    // Check if the user's email is already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
@@ -64,30 +140,30 @@ const signup = async (req, res) => {
       };
 
       const info = await transporter.sendMail(mailOptions);
-      // console.log("Email sent:",info.response);
+      console.log("Email sent:", info.response);
+      
+      res.status(200).json({
+        success: true,
+        message: "Signed up successfully. Email sent successfully.",
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({
         success: false,
-        error: "Error while sending mail",
+        message: "Error while sending mail",
+        error: error.message,
       });
     }
-    res.status(200).json({
-      success: true,
-      messages: ["Signed up successfully", "Email sent successfully"],
-    });
   } catch (error) {
     console.error(error);
-    console.error(error);
-    return res.status(500).json({
+    // Respond to the client with failure due to signup error
+    res.status(500).json({
       success: false,
-      error: "User cannot be registered, Please try again later",
-      details: error.message,
+      message: "User cannot be registered. Please try again later.",
+      error: error.message,
     });
   }
 };
-
-// Login
 
 const login = async (req, res) => {
   try {
