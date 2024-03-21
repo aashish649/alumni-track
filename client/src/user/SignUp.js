@@ -44,7 +44,6 @@ const SignupForm = () => {
     setuser({ ...user, [name]: value });
   };
 
-  // Password must be of 6 characters long having one Uppercase,LowerCase,one digit.
   const validPassword = (password) => {
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     return passRegex.test(password);
