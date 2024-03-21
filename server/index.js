@@ -20,11 +20,11 @@ app.use(cors({
   credentials: true,
 }));
 
+
 app.use(cookieParser());
 app.use(express.json());
 
 connectDb();
-
 
 cloudinaryConnect();
 
@@ -32,7 +32,6 @@ cloudinaryConnect();
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/post", postRouter);
-
 
 
 app.use('/api/v1/users/controllers/pdfuploads', express.static(path.join(__dirname, 'controllers', 'pdfuploads')));
