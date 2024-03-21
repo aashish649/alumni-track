@@ -3,6 +3,13 @@
 
 Alumni Tracker is a  web application developed using the MERN (MongoDB, Express.js, React, Node.js) stack. It serves  a platform for alumni to connect, share updates, and engage with the admin seamlessly. The application is divided into user and admin interfaces, each equipped with distinct features and functionalities.
 
+
+## Deployment
+This website is hosted on Vercel. You can access the deployed application using the following link:
+
+[Alumni Tracker](https://alumni-track.vercel.app/)
+
+ 
 ## Features
 
 ### User Interface:
@@ -52,6 +59,18 @@ Alumni Tracker is a  web application developed using the MERN (MongoDB, Express.
 - **FAQ Administration:**
   - Admins can manage and respond to user queries in the FAQ section.
 
+## Screenshots
+![screenshots1](https://github.com/aashish649/alumni-track/assets/150827208/49817231-c2b1-4efa-a8d1-c9ef4ffd9059)
+
+![Screenshots2](https://github.com/aashish649/alumni-track/assets/150827208/862728c2-364b-4dec-aa65-4f06fcb00b31)
+
+![Screenshot (155)](https://github.com/aashish649/alumni-track/assets/150827208/2ee68f14-b2cd-4013-b4fa-dac736e4f585)
+
+![Screenshot (156)](https://github.com/aashish649/alumni-track/assets/150827208/7654eb57-7d02-4127-89d4-5c8ffaf0e956)
+
+![Screenshot (157)](https://github.com/aashish649/alumni-track/assets/150827208/87815397-c2ae-496f-8d5d-f632aa94d82d)
+
+![Screenshot (159)](https://github.com/aashish649/alumni-track/assets/150827208/ab360cb4-e77e-4f8e-bc8d-ac1392fafd45)
 
 ## Technologies Used
 
@@ -120,10 +139,4 @@ Alumni Tracker is a  web application developed using the MERN (MongoDB, Express.
 4.Run the Application: 
   -In the client directory: `npm start`
   -In the server directory: `npm start`
-
-## Deployment
-This website is hosted on Vercel. You can access the deployed application using the following link:
-
-[Alumni Tracker](https://alumni-track.vercel.app/)
- 
 
